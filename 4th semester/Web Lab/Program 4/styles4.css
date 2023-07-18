@@ -1,0 +1,45 @@
+*{
+    background-color: pink;
+}
+.BoldText{
+    font-weight: bold; 
+    color: orange; 
+    text-decoration: underline;
+    font-size: 20px;
+}
+a:link {
+    color : red;
+}
+a:visited {
+    color : blue;
+}
+a:hover {
+    color:cyan;
+}
+a:active {
+    color: yellow;
+}
+#c1 {
+    cursor :crosshair;
+    color : green;
+}
+#c2 {
+    cursor :pointer;
+    color : green;
+}
+#c3 {
+    cursor :move;
+    color : green;
+}
+#c4 {
+    cursor :text;
+    color : green;
+}
+#c5 {
+    cursor :wait;
+    color : green;
+}
+#c6 {
+    cursor:help;
+    color : green;
+}
