@@ -1,7 +1,6 @@
 import re
 
 phno_pattern = re.compile(r'\+\d{12}$')
-#email_pat = re.compile(r'\S+\@\S+')
 email_pattern = re.compile(r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)')
 email = []
 phno = []
