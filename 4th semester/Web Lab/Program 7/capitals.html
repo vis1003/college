@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>Country Capitals</title>
+        <style>
+            *{
+                margin: 0.5%;
+            }
+            #box2{
+                color:blue;
+                font-size: 25px;
+                font-weight: 900;
+            }
+            #box1{
+                font-size: 20px;
+                font-weight: 900;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <h1>Countries and Capitals</h1>
+            <br>
+            <form name="form">
+                Select Country: 
+                <select name="country" id="box1" onclick="capital()" required>
+                    <option value=""></option>
+                    <option value="New Delhi">India</option>
+                    <option value="Canberra">Australia</option>
+                    <option value="Washington DC">USA</option>
+                    <option value="London">United Kingdom</option>
+                    <option value="Berlin">Germany</option>
+                </select>
+                <br><br>
+                Capital: <input type="text" id="box2">
+            </form>
+        </center>
+        <script>
+            function capital()
+            {
+                var a=document.getElementById("box1").value;
+                document.getElementById("box2").value = a;
+            }
+        </script>
+    </body>
+</html>
