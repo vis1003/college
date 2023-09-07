@@ -2,7 +2,7 @@ import java.util.Scanner;
 class graphMST {
 	int n, n_edges;
 	int adj[][];
-	int[][] edges;
+	int edges[][];
 	static final int infinity=999;
 	
 	public void create_graph() {
@@ -10,7 +10,6 @@ class graphMST {
 		System.out.println("Enter number of nodes in the graph:");
 		n=sc.nextInt();
 		int i,j,k=0;
-		adj=new int[n][n];
 		adj=new int[n][n];
 		edges=new int[n*n][3];
 		System.out.println("Enter cost adjecency matrix for the graph:");
