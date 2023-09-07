@@ -57,7 +57,7 @@ class graphMST {
 	    	  if(x!=y)
 	    	  {
 	    		  cost=cost+edges[i][2];
-	    		  mst[ecount][0]=edges[i][2];
+	    		  mst[ecount][0]=edges[i][0];
 	    		  mst[ecount++][1]=edges[i][1];
 	    		  setunion(x,y,parent);
 	    	  }
