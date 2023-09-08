@@ -1,6 +1,6 @@
 import java.util.Scanner;
 class graphMST {
-	int n, n_edges;
+	int n;
 	int adj[][];
 	int edges[][];
 	static final int infinity=999;
