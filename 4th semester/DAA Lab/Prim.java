@@ -49,24 +49,13 @@ public class Prim {
 		System.out.println("Enter no. of nodes in the graph : ");
 		N = sc.nextInt();
 		adj = new int[N][N];
-		for(i=0;i<N;i++)
-		{
-			for(j=0;j<N;j++)
-			{
-				adj[i][j] = -1;
-			}
-		}
 		System.out.println("Enter the adjacency matrix : ");
-		System.out.println("Enter 0 for no connection and weights for connection");
+		System.out.println("Enter 999 for no connection and weights for connection");
 		for(i=0;i<N;i++)
 		{
 			for(j=0;j<N;j++)
 			{
 				adj[i][j] = sc.nextInt();
-				if(adj[i][j] == 0)
-				{
-					adj[i][j]=999;
-				}
 			}
 		}
 		Prim.my_prim(adj, N);
