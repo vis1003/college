@@ -1,0 +1,18 @@
+<html>
+    <title>
+        Demo sample
+    </title>
+    <head>
+        <script type="text/javascript"
+        src="]angular.min.js">
+    </script>
+    <body>
+        <div ng-app="" ng-init="age = 41">
+            Enter your name: <input type = "text" ng-model="name"><br>
+            Your name using angular expression : {{name}}<br>
+            Your name using ng-bind : <p ng-bind ="name"></p>
+            Your age is : <p ng-bind="age"></p>
+        </div>
+    </body>
+    </head>
+</html>
