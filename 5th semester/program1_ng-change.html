@@ -1,0 +1,32 @@
+<!-- Input first and last name and display full name -->
+<html>
+    <head>
+        <script type="text/javascript"
+        src="angular.min.js"></script>
+
+        <script>
+            var app=angular.module("myApp",[]);
+            app.controller("myCntrl",function($scope){
+                $scope.firstName="John"
+                $scope.lastName="Doe"
+                $scope.fullName=""
+
+                $scope.makeFullName=function()
+                {
+                    $scope.fullName=$scope.firstName+" "+$scope.lastName
+                }
+            });
+        </script>
+    </head>
+    <body ng-app="myApp">
+        <div>
+            <h1>Angular JS App to display Full Name</h1>
+            <div ng-controller="myCntrl">
+                Enter first name : <input type="text" ng-model="firstName" ng-change="makeFullName()"><br>
+                Enter last name : <input type="text" ng-model="lastName" ng-change="makeFullName()"><br>
+                <br>
+                Your full name : {{fullName}}
+            </div>
+        </div>
+    </body>
+</html>
