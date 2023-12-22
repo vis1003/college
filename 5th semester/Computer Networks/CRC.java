@@ -68,3 +68,18 @@ public class CRC {
 			return(1);
 	}
 }
+
+/* output:
+Enter no. of data bits:
+10
+Enter no. of generator bits:
+4
+Enter data bits:
+1 0 1 1 1 0 1 1 0 1
+Enter generator bits:
+1 0 0 1
+The code bits added are:
+010
+The code data is:
+1011101101010
+*/
