@@ -1,1 +1,121 @@
-new program
+MariaDB [(none)]> create database order_214;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> use order_214;
+MariaDB [order_214]> create table SALESMAN(Salesman_id int primary key, Name varchar(50), City varchar(30), Commission varchar(4));
+Query OK, 0 rows affected (0.078 sec)
+
+MariaDB [order_214]> create table CUSTOMER(Customer_id int primary key, Cust_Name varchar(50), City varchar(30), Grade int, Salesman_id int, foreign key(Salesman_id) references SALESMAN(Salesman_id) on delete set null);
+Query OK, 0 rows affected (0.020 sec)
+
+MariaDB [order_214]> create table ORDERS(Ord_No int primary key, Purchase_amt int, Ord_Date date, Customer_id int, Salesman_id int, foreign key(Salesman_id) references SALESMAN(Salesman_id) on delete cascade, foreign key(Customer_id) references CUSTOMER(Customer_id) on delete cascade);
+Query OK, 0 rows affected (0.017 sec)
+
+MariaDB [order_214]> show tables;
++---------------------+
+| Tables_in_order_214 |
++---------------------+
+| CUSTOMER            |
+| ORDERS              |
+| SALESMAN            |
++---------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [order_214]> insert into SALESMAN values(1000, "Rahul", "Bangalore", "20%");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [order_214]> insert into SALESMAN values(2000, "Ankita", "Bangalore", "25%");
+Query OK, 1 row affected (0.008 sec)
+
+MariaDB [order_214]> insert into SALESMAN values(3000, "Sharma", "Mysore", "30%");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [order_214]> insert into SALESMAN values(4000, "Anjali", "Delhi", "15%");
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [order_214]> insert into SALESMAN values(5000, "Raj", "Hyderabad", "15%");
+Query OK, 1 row affected (0.069 sec)
+
+MariaDB [order_214]> insert into CUSTOMER values(1, "Adya", "Bangalore", 100, 1000);
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [order_214]> insert into CUSTOMER values(2, "Banu", "Mangalore", 300, 1000);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [order_214]> insert into CUSTOMER values(3, "Chethan", "Chennai", 400, 2000);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [order_214]> insert into CUSTOMER values(4, "Danish", "Bangalore", 200, 2000);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [order_214]> insert into CUSTOMER values(5, "Esha", "Bangalore", 400, 3000);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [order_214]> insert into ORDERS values(201, 5000, "2020-06-02", 1, 1000);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [order_214]> insert into ORDERS values(202, 450, "2020-04-09", 1, 2000);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [order_214]> insert into ORDERS values(203, 1000, "2020-03-15", 3, 2000);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [order_214]> insert into ORDERS values(204, 3500, "2020-07-09", 4, 3000);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [order_214]> insert into ORDERS values(205, 550, "2020-05-05", 2, 2000);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [order_214]> select * from SALESMAN;
++-------------+--------+-----------+------------+
+| Salesman_id | Name   | City      | Commission |
++-------------+--------+-----------+------------+
+|        1000 | Rahul  | Bangalore | 20%        |
+|        2000 | Ankita | Bangalore | 25%        |
+|        3000 | Sharma | Mysore    | 30%        |
+|        4000 | Anjali | Delhi     | 15%        |
+|        5000 | Raj    | Hyderabad | 15%        |
++-------------+--------+-----------+------------+
+5 rows in set (0.000 sec)
+
+MariaDB [order_214]> select * from CUSTOMER;
++-------------+-----------+-----------+-------+-------------+
+| Customer_id | Cust_Name | City      | Grade | Salesman_id |
++-------------+-----------+-----------+-------+-------------+
+|           1 | Adya      | Bangalore |   100 |        1000 |
+|           2 | Banu      | Mangalore |   300 |        1000 |
+|           3 | Chethan   | Chennai   |   400 |        2000 |
+|           4 | Danish    | Bangalore |   200 |        2000 |
+|           5 | Esha      | Bangalore |   400 |        3000 |
++-------------+-----------+-----------+-------+-------------+
+5 rows in set (0.000 sec)
+
+MariaDB [order_214]> select * from ORDERS;
++--------+--------------+------------+-------------+-------------+
+| Ord_No | Purchase_amt | Ord_Date   | Customer_id | Salesman_id |
++--------+--------------+------------+-------------+-------------+
+|    201 |         5000 | 2020-06-02 |           1 |        1000 |
+|    202 |          450 | 2020-04-09 |           1 |        2000 |
+|    203 |         1000 | 2020-03-15 |           3 |        2000 |
+|    204 |         3500 | 2020-07-09 |           4 |        3000 |
+|    205 |          550 | 2020-05-05 |           2 |        2000 |
++--------+--------------+------------+-------------+-------------+
+
+MariaDB [order_214]> select count(*) from CUSTOMER where Grade>(select AVG(Grade) from CUSTOMER where City="Bangalore");
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.000 sec)
+
+MariaDB [order_214]> select Salesman_id, Name from SALESMAN where Salesman_id in(select Salesman_id from CUSTOMER c group by Salesman_id having count(*)>1);
++-------------+--------+
+| Salesman_id | Name   |
++-------------+--------+
+|        1000 | Rahul  |
+|        2000 | Ankita |
++-------------+--------+
+2 rows in set (0.003 sec)
+
+
