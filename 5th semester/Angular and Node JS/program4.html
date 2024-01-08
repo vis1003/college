@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title>Factorial and Square</title>
+        <script src="angular.min.js"></script>
+
+    </head>
+    <body ng-app="myApp4">
+        <h2>Calculate factorial & square of a number</h2>
+        <div ng-controller="calcfactsquare">
+            <input type="text" placeholder="Enter a number" id="input" ng-model ="inpnum" />&emsp;
+            <input type="button" class="btn_cfact"  value="Calculate Factorial" ng-click="calc_fact()" />&emsp;
+            <input type="button" class="btn_csq"  value="Calculate Square" ng-click="calc_sqr()" />
+        
+            <br/><br>
+
+            {{result}}
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var calc2vals = angular.module("myApp4",[]);
+    calc2vals.controller("calcfactsquare", function($scope)
+    {
+        $scope.inpnum = ""
+        $scope.result = ""
+
+        $scope.calc_fact = function() {
+            if($scope.inpnum == "")
+            {
+                alert("You have to enter a number to calculate factorial");
+                document.getElementById("inpnum").focus();
+                return false;
+            }
+
+            else
+            {
+                if($scope.inpnum == 0)
+                    $scope.result = $scope.inpnum+"! = "+1;
+
+                else if($scope.inpnum <0 || $scope.inpnum.includes("."))
+                    $scope.result = $scope.inpnum+"! is undefined";
+
+                else
+                {
+                    $scope.fact = 1;
+
+                    for(var h = $scope.inpnum; h>=1 ; h--)
+                        $scope.fact=$scope.fact*h;
+
+
+                    $scope.result=$scope.inpnum+"!="+$scope.fact;
+                }
+            }
+        }
+        $scope.calc_sqr = function(){
+            if($scope.inpnum == ""){
+                alert("You have to enter a number to calculate square");
+                document.getElementById("inpnum").focus();
+                return false;
+            }
+
+            else{
+                $scope.result="Square of "+$scope.inpnum+" = "+$scope.inpnum**2;
+            }
+        }
+    })
+</script>
