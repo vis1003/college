@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <title>To-do List</title>
+        <script src="angular.min.js"></script>
+    </head>
+    <body ng-app="myApp6">
+        <h2>To-Do list</h2>
+        <div ng-controller="Taskcontroller">
+        Enter a task:<input type="text" style="font-family: Verdana, Geneva, Tahoma, sans-serif"  id="tsk" ng-model="newTask" />
+        <input type="button" value="Add Task" ng-click="addTask()" /><br><br>
+        <ul>
+            <li ng-repeat="task in tasks">
+                <span ng-show="!task.EDITING">{{task.TITLE}}</span>
+                <input ng-show="task.EDITING" ng-model="task.TITLE" ng-blur="turnoffEditing(task)" />
+                <input type="button"   value="Edit" ng-click="editTask(task)" />&emsp;
+                <input type="button"   value="Delete" ng-click="deleteTask(task)" />  
+            </li>
+        </ul>
+        </div>
+    </body>
+</html>
+
+<script>
+    var taskops= angular.module("myApp6",[]);
+    taskops.controller("Taskcontroller",function($scope){
+
+        $scope.tasks = [
+            {"TITLE": "Brush my teeth", "COMPLETED" : true,"EDITING" : false},
+            {"TITLE": "Have coffee", "COMPLETED" : false,"EDITING" : false}
+        ];
+
+
+        $scope.addTask = function()
+        {
+            if($scope.newTask)
+            {
+                var t ={
+                    "TITLE" : $scope.newTask,
+                    "COMPLETED" : false,
+                    "EDITING" : false
+                }
+
+                $scope.tasks.push(t);
+
+            }
+            else
+            {
+                alert("Please enter a task to add");
+                document.getElementById("tsk").focus();
+                return false;
+            }
+        }
+
+        $scope.editTask = function(task)
+        {
+            task.EDITING = true;
+
+        }
+        $scope.turnoffEditing = function(task)
+        {
+            task.EDITING = false;
+
+        }
+
+
+        $scope.deleteTask = function(task)
+        {
+            var doublecheck = confirm("Are you sure you want to remove this task?");
+
+            if(doublecheck == true)
+            {
+                var idx = $scope.tasks.indexOf(task);
+                $scope.tasks.splice(idx,1);
+
+            }
+            else
+            {
+                alert("You chose not to remove this task");
+            }
+        }
+    });
+</script>
