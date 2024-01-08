@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Display CGPA</title>
+        <script src="angular.min.js"></script>
+    </head>
+    <body ng-app="myApp5">
+        <h2>Display student details and thier CGPA</h2>
+        <div ng-controller="stud">
+            <input class="numstuds" placeholder="Enter #(students)" ng-model="num" /> &emsp;
+            <input id="genbtn" type="button" value="Generate" ng-click="generateData()" /><br><br>
+
+            <table width="200px" border="1" ng-show="studentData.length > 0">
+                <tr>
+                    <th>Sl#</th>
+                    <th>Name</th>
+                    <th>CGPA</th>
+                </tr>
+                <tr ng-repeat="student in studentData">
+                    <td align="center">{{student.Slno}}</td>
+                    <td>{{student.Name}}</td>
+                    <td align="center">{{student.CGPA}}</td> 
+
+                </tr>
+
+            </table><br><br>
+            #(student) = {{studentData.length}}
+        </div>
+    </body>
+    
+</html>
+
+<script>
+    var studDets = angular.module("myApp5",[]);
+    studDets.controller("stud",function($scope) {
+        $scope.generateData=function()
+        {
+            $scope.studentData=[];
+
+            for(var h=1;h<=$scope.num;h++)
+            {
+                var student={
+                    "Slno":h,
+                    "Name":"Student-"+h,
+                    "CGPA":(Math.random()*10).toFixed(2)
+                }
+
+                $scope.studentData.push(student);
+            }
+        }
+    });
+</script>
