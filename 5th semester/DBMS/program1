@@ -1,0 +1,122 @@
+MariaDB [(none)]> use movie_db;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [movie_db]> show tables;
++--------------------+
+| Tables_in_movie_db |
++--------------------+
+| ACTOR              |
+| DIRECTOR           |
+| MOVIES             |
+| MOVIE_CAST         |
+| RATING             |
++--------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [movie_db]> select * from DIRECTOR;
++--------+------------------+-----------+
+| Dir_id | Dir_Name         | Dir_phone |
++--------+------------------+-----------+
+|    201 | Hitchcock        | 908627187 |
+|    202 | Steven Spielberg | 908653287 |
+|    203 | Hitchcock        | 908847987 |
+|    204 | Martin           | 956827187 |
++--------+------------------+-----------+
+4 rows in set (0.034 sec)
+
+MariaDB [movie_db]> select * from ACTOR;
++--------+--------------+------------+
+| Act_id | Act_Name     | Act_gender |
++--------+--------------+------------+
+|    101 | John Abraham | M          |
+|    102 | John Mohan   | M          |
+|    103 | Deepika      | F          |
+|    104 | Anushka      | F          |
+|    105 | Disha        | F          |
++--------+--------------+------------+
+5 rows in set (0.000 sec)
+
+MariaDB [movie_db]> select * from MOVIES;
++--------+-----------+------------+------------+--------+
+| Mov_id | Mov_Title | Movie_Year | Movie_Lang | Dir_id |
++--------+-----------+------------+------------+--------+
+|    301 | Bambi     |       2001 | English    |    201 |
+|    302 | KGF       |       2004 | Kannada    |    202 |
+|    303 | Kravat    |       2009 | Russian    |    204 |
+|    304 | Avengers  |       2011 | English    |    202 |
+|    305 | PK        |       2019 | Hindi      |    203 |
+|    306 | Dangal    |       1990 | Hindi      |    202 |
++--------+-----------+------------+------------+--------+
+6 rows in set (0.001 sec)
+
+MariaDB [movie_db]> select * from MOVIE_CAST;
++--------+--------+-----------+
+| Act_id | Mov_id | Role      |
++--------+--------+-----------+
+|    101 |    301 | Lead      |
+|    101 |    302 | Chef      |
+|    101 |    303 | Assistant |
+|    101 |    306 | Fighter   |
+|    102 |    303 | Banker    |
+|    102 |    304 | Chef      |
+|    103 |    302 | Assistant |
+|    104 |    305 | King      |
+|    105 |    304 | Soldier   |
++--------+--------+-----------+
+9 rows in set (0.002 sec)
+
+MariaDB [movie_db]> select * from RATING;
++--------+-----------+
+| Mov_id | Rev_stars |
++--------+-----------+
+|    301 |         3 |
+|    302 |         5 |
+|    303 |         4 |
+|    304 |         5 |
+|    305 |         1 |
++--------+-----------+
+5 rows in set (0.001 sec)
+
+MariaDB [movie_db]> select Mov_Title from MOVIES m,DIRECTOR d WHERE m.Dir_id=d.Dir_id AND Dir_Name='Hitchcock';
++-----------+
+| Mov_Title |
++-----------+
+| Bambi     |
+| PK        |
++-----------+
+2 rows in set (0.003 sec)
+
+MariaDB [movie_db]> select distinct m.Mov_Title, c.Act_id from MOVIES m, MOVIE_CAST c,ACTOR a WHERE m.Mov_id=c.Mov_id AND c.Act_id in(SELECT c.Act_id FROM MOVIE_CAST c GROUP BY(c.Act_id) HAVING count(c.Mov_id) >= 2);
++-----------+--------+
+| Mov_Title | Act_id |
++-----------+--------+
+| Bambi     |    101 |
+| KGF       |    101 |
+| Kravat    |    101 |
+| Kravat    |    102 |
+| Avengers  |    102 |
+| Dangal    |    101 |
++-----------+--------+
+6 rows in set (0.019 sec)
+
+MariaDB [movie_db]> select * from(select a.Act_Name from ACTOR a, MOVIES m,MOVIE_CAST mc where a.Act_id=mc.Act_id and mc.Mov_id AND m.Movie_Year < 2000) T1 NATURAL JOIN (select a.Act_name from ACTOR a,MOVIES m,MOVIE_CAST mc where a.Act_id=mc.Act_id and mc.Mov_id=m.Mov_id and m.Movie_Year > 2015) T2;
++----------+
+| Act_Name |
++----------+
+| Anushka  |
++----------+
+1 row in set (0.002 sec)
+
+MariaDB [movie_db]> select m.Mov_Title,max(Rev_stars) as "max_stars" from MOVIES m,RATING r,MOVIE_CAST mc where m.Mov_id=r.Mov_id and mc.Mov_id and r.Rev_stars > 0 order by Mov_Title;
++-----------+-----------+
+| Mov_Title | max_stars |
++-----------+-----------+
+| Bambi     |         5 |
++-----------+-----------+
+1 row in set (0.001 sec)
+
+MariaDB [movie_db]> update RATING set Rev_stars=5 where Mov_id in (select Mov_id from MOVIES m,DIRECTOR d where d.Dir_id=m.Dir_id AND Dir_Name="Steven Spielberg");
+Query OK, 0 rows affected (0.001 sec)
+Rows matched: 2  Changed: 0  Warnings: 0
