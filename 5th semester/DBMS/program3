@@ -1,0 +1,327 @@
+MariaDB [(none)]> create database company_214;
+Query OK, 1 row affected (0.000 sec)
+
+MariaDB [(none)]> use company_214;
+Database changed
+MariaDB [company_214]> create table DEPARTMENT (Dno int primary key, DName varchar(40), MgrSSN int, MgrStartDate date);
+Query OK, 0 rows affected (0.083 sec)
+
+MariaDB [company_214]> create table EMPLOYEE(SSN int primary key, Name varchar(40), Address varchar(50), Sex char, Salary int, SuperSSN int, DNo int, foreign key(SuperSSN) references EMPLOYEE(SSN), foreign key(DNo) references DEPARTMENT(DNo));
+Query OK, 0 rows affected (0.016 sec)
+
+MariaDB [company_214]> create table DLOCATION (DNo int, DLoc varchar(50), primary key(DNo,DLoc), foreign key(DNo) references DEPARTMENT(DNo));
+Query OK, 0 rows affected (0.010 sec)
+
+MariaDB [company_214]> create table PROJECT (PNo int primary key, PName varchar(50), PLocation varchar(50), DNo int, foreign key(DNo) references DEPARTMENT(DNo));
+Query OK, 0 rows affected (0.016 sec)
+
+MariaDB [company_214]> create table WORKS_ON (SSN int, PNo int, Hours int, foreign key(SSN) references EMPLOYEE(SSN), foreign key(PNo) references PROJECT(PNo));
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [company_214]> alter table DEPARTMENT add foreign key(MgrSSN) references  EMPLOYEE(SSN);
+Query OK, 0 rows affected (0.050 sec)              
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1001, "Jacob Scott", "Jayanagar", "M", 6370010);
+Query OK, 1 row affected (0.072 sec)
+
+MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1002, "Tim", "Jayanagar", "M", 7007011);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1003, "Jil", "Jayanagar", "F", 6370010);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1004, "Josh", "Jayanagar", "M", 6370010);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1005, "Jim", "Jayanagar", "M", 6370010);
+Query OK, 1 row affected (0.009 sec)
+
+MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1006, "Kate", "Jayanagar", "F", 6370010);
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1007, "Joseph", "Jayanagar", "M", 6370010);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1007, "Jay", "Jayanagar", "M", 6370010);
+ERROR 1062 (23000): Duplicate entry '1007' for key 'PRIMARY'
+MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1008, "Jay", "Jayanagar", "M", 6370010);
+Query OK, 1 row affected (0.072 sec)
+
+MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1009, "Claire", "Jayanagar", "F", 6370010);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1010, "Jack", "Jayanagar", "M", 6370010);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1011, "Jack", "Jayanagar", "M", 6378236);
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1012, "Timmy", "Jayanagar", "M", 637000);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company_214]> insert into DEPARTMENT values (1, "Accounts", 1001, "2017-02-12");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into DEPARTMENT values (2, "Finance", 1003, "2017-02-10");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into DEPARTMENT values (3, "HR", 1003, "2017-03-23");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into DEPARTMENT values (4, Admin", 1003, "2015-05-12");
+    "> 
+    "> insert into DEPARTMENT values (4, "Admin", 1003, "2015-05-12");
+    "> 
+    "> ;
+    "> 
+    "> 
+    "> Ctrl-C -- exit!
+Aborted
+(base) student@csel5sys20-OptiPlex-3090:/opt/lampp/bin$ ./mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 12
+Server version: 10.4.14-MariaDB Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use company_214;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [company_214]> insert into DEPARTMENT values (4, "Admin", 1003, "2015-05-12");
+Query OK, 1 row affected (0.071 sec)
+
+MariaDB [company_214]> insert into DEPARTMENT values (5, "Payroll", 1002, "2012-02-12");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into DEPARTMENT values (6, "Housekeeping", 1002, "2013-02-12");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into DEPARTMENT values (7, "Training", 1002, "2014-02-12");
+Query OK, 1 row affected (0.007 sec)
+
+MariaDB [company_214]> insert into DEPARTMENT values (8, "PF", 1002, "2010-02-12");
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company_214]> update EMPLOYEE set SuperSSN=NULL, DNo=1 where SSN=1001;
+Query OK, 1 row affected (0.005 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [company_214]> update EMPLOYEE set SuperSSN=1001, DNo=7 where SSN=1002;
+Query OK, 1 row affected (0.004 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [company_214]> update EMPLOYEE set SuperSSN=1001, DNo=5 where SSN=1003;
+Query OK, 1 row affected (0.072 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [company_214]> update EMPLOYEE set SuperSSN=1002, DNo=5 where SSN=1004;
+Query OK, 1 row affected (0.005 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [company_214]> update EMPLOYEE set SuperSSN=1001, DNo=5 where SSN=1005;
+Query OK, 1 row affected (0.005 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [company_214]> update EMPLOYEE set SuperSSN=1001, DNo=2 where SSN=1006;
+Query OK, 1 row affected (0.005 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [company_214]> update EMPLOYEE set SuperSSN=1001, DNo=3 where SSN=1007;
+Query OK, 1 row affected (0.004 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [company_214]> update EMPLOYEE set SuperSSN=1003, DNo=4 where SSN=1008;
+Query OK, 1 row affected (0.005 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [company_214]> update EMPLOYEE set SuperSSN=1006, DNo=6 where SSN=1009;
+Query OK, 1 row affected (0.006 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [company_214]> update EMPLOYEE set SuperSSN=1005, DNo=1 where SSN=1010;
+Query OK, 1 row affected (0.069 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [company_214]> update EMPLOYEE set SuperSSN=1002, DNo=1 where SSN=1011;
+Query OK, 1 row affected (0.005 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [company_214]> update EMPLOYEE set SuperSSN=1001, DNo=1 where SSN=1012;
+Query OK, 1 row affected (0.006 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [company_214]> insert into DLOCATION values (1, "Bangalore");
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company_214]> insert into DLOCATION values (1, "Mumbai");
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company_214]> insert into DLOCATION values (1, "Pune");
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company_214]> insert into DLOCATION values (2, "Mumbai");
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [company_214]> insert into DLOCATION values (3, "Chennai");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into DLOCATION values (4, "Mumbai");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into DLOCATION values (5, "Guwahati");
+Query OK, 1 row affected (0.069 sec)
+
+MariaDB [company_214]> insert into DLOCATION values (6, "Mumbai");
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company_214]> insert into DLOCATION values (7, "Delhi");
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into DLOCATION values (8, "Mumbai");
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company_214]> insert into DLOCATION values (8, "Pune");
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company_214]> insert into PROJECT values (10, "IOT", "Mumbai", 1);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into PROJECT values (11, "Adhoc", "Pune", 1);
+Query OK, 1 row affected (0.071 sec)
+
+MariaDB [company_214]> insert into PROJECT values (12, "Mobile", "Bangalore", 2);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into PROJECT values (13, "Finacle", "Chennai", 3);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into PROJECT values (14, "Android", "Pune", 4);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into PROJECT values (15, "Java", "Mumbai", 5);
+Query OK, 1 row affected (0.070 sec)
+
+MariaDB [company_214]> insert into PROJECT values (16, "Dot Net", "Pune", 5);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into PROJECT values (17, "c#", "Mumbai", 6);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company_214]> insert into PROJECT values (18, "c++", "Delhi", 7);
+Query OK, 1 row affected (0.071 sec)
+
+MariaDB [company_214]> insert into PROJECT values (19, "Python", "Delhi", 8);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company_214]> insert into WORKS_ON values (1001, 11, 40);
+Query OK, 1 row affected (0.017 sec)
+
+MariaDB [company_214]> insert into WORKS_ON values (1001, 15, 45);
+Query OK, 1 row affected (0.071 sec)
+
+MariaDB [company_214]> insert into WORKS_ON values (1001, 16, 40);
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [company_214]> insert into WORKS_ON values (1002, 10, 45);
+Query OK, 1 row affected (0.011 sec)
+
+MariaDB [company_214]> insert into WORKS_ON values (1002, 11, 45);
+Query OK, 1 row affected (0.071 sec)
+
+MariaDB [company_214]> insert into WORKS_ON values (1003, 11, 45);
+Query OK, 1 row affected (0.070 sec)
+
+MariaDB [company_214]> insert into WORKS_ON values (1004, 19, 45);
+Query OK, 1 row affected (0.072 sec)
+
+MariaDB [company_214]> insert into WORKS_ON values (1005, 18, 45);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [company_214]> select * from EMPLOYEE;
++------+-------------+-----------+------+---------+----------+------+
+| SSN  | Name        | Address   | Sex  | Salary  | SuperSSN | DNo  |
++------+-------------+-----------+------+---------+----------+------+
+| 1001 | Jacob Scott | Jayanagar | M    | 6370010 |     NULL |    1 |
+| 1002 | Tim         | Jayanagar | M    | 7007011 |     1001 |    7 |
+| 1003 | Jil         | Jayanagar | F    | 6370010 |     1001 |    5 |
+| 1004 | Josh        | Jayanagar | M    | 6370010 |     1002 |    5 |
+| 1005 | Jim         | Jayanagar | M    | 6370010 |     1001 |    5 |
+| 1006 | Kate        | Jayanagar | F    | 6370010 |     1001 |    2 |
+| 1007 | Joseph      | Jayanagar | M    | 6370010 |     1001 |    3 |
+| 1008 | Jay         | Jayanagar | M    | 6370010 |     1003 |    4 |
+| 1009 | Claire      | Jayanagar | F    | 6370010 |     1006 |    6 |
+| 1010 | Jack        | Jayanagar | M    | 6370010 |     1005 |    1 |
+| 1011 | Jack        | Jayanagar | M    | 6378236 |     1002 |    1 |
+| 1012 | Timmy       | Jayanagar | M    |  637000 |     1001 |    1 |
++------+-------------+-----------+------+---------+----------+------+
+12 rows in set (0.001 sec)
+
+MariaDB [company_214]> select * from DEPARTMENT;
++-----+--------------+--------+--------------+
+| Dno | DName        | MgrSSN | MgrStartDate |
++-----+--------------+--------+--------------+
+|   1 | Accounts     |   1001 | 2017-02-12   |
+|   2 | Finance      |   1003 | 2017-02-10   |
+|   3 | HR           |   1003 | 2017-03-23   |
+|   4 | Admin        |   1003 | 2015-05-12   |
+|   5 | Payroll      |   1002 | 2012-02-12   |
+|   6 | Housekeeping |   1002 | 2013-02-12   |
+|   7 | Training     |   1002 | 2014-02-12   |
+|   8 | PF           |   1002 | 2010-02-12   |
++-----+--------------+--------+--------------+
+8 rows in set (0.001 sec)
+
+MariaDB [company_214]> select *from DLOCATION;
++-----+-----------+
+| DNo | DLoc      |
++-----+-----------+
+|   1 | Bangalore |
+|   1 | Mumbai    |
+|   1 | Pune      |
+|   2 | Mumbai    |
+|   3 | Chennai   |
+|   4 | Mumbai    |
+|   5 | Guwahati  |
+|   6 | Mumbai    |
+|   7 | Delhi     |
+|   8 | Mumbai    |
+|   8 | Pune      |
++-----+-----------+
+11 rows in set (0.001 sec)
+
+MariaDB [company_214]> select * from PROJECT;
++-----+---------+-----------+------+
+| PNo | PName   | PLocation | DNo  |
++-----+---------+-----------+------+
+|  10 | IOT     | Mumbai    |    1 |
+|  11 | Adhoc   | Pune      |    1 |
+|  12 | Mobile  | Bangalore |    2 |
+|  13 | Finacle | Chennai   |    3 |
+|  14 | Android | Pune      |    4 |
+|  15 | Java    | Mumbai    |    5 |
+|  16 | Dot Net | Pune      |    5 |
+|  17 | c#      | Mumbai    |    6 |
+|  18 | c++     | Delhi     |    7 |
+|  19 | Python  | Delhi     |    8 |
++-----+---------+-----------+------+
+10 rows in set (0.001 sec)
+
+MariaDB [company_214]> select * from WORKS_ON;
++------+------+-------+
+| SSN  | PNo  | Hours |
++------+------+-------+
+| 1001 |   11 |    40 |
+| 1001 |   15 |    45 |
+| 1001 |   16 |    40 |
+| 1002 |   10 |    45 |
+| 1002 |   11 |    45 |
+| 1003 |   11 |    45 |
+| 1004 |   19 |    45 |
+| 1005 |   18 |    45 |
++------+------+-------+
+
