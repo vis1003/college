@@ -43,8 +43,6 @@ Query OK, 1 row affected (0.006 sec)
 MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1007, "Joseph", "Jayanagar", "M", 6370010);
 Query OK, 1 row affected (0.005 sec)
 
-MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1007, "Jay", "Jayanagar", "M", 6370010);
-ERROR 1062 (23000): Duplicate entry '1007' for key 'PRIMARY'
 MariaDB [company_214]> insert into EMPLOYEE(SSN, Name, Address, Sex, Salary) values (1008, "Jay", "Jayanagar", "M", 6370010);
 Query OK, 1 row affected (0.072 sec)
 
