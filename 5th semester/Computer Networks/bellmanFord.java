@@ -52,24 +52,6 @@ public class bellmanFord {
 Enter the number of vertices:
 5
 Enter the adjacency matrix:
-0	2	2	999	999
-2	0	999	3	999
-2	999	0	4	999
-999	3	6	0	-5
-999	999	4	-5	0
-Enter the source node:
-0
-Distance of source 0 to 0 is 0
-Distance of source 0 to 1 is 2
-Distance of source 0 to 2 is 2
-Distance of source 0 to 3 is -5
-Distance of source 0 to 4 is 0
-*/
-
-/*
-Enter the number of vertices:
-5
-Enter the adjacency matrix:
 0	3	999	2	999
 3	0	5	999	3
 999	5	0	4	999
