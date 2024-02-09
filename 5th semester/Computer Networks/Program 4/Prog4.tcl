@@ -70,7 +70,7 @@ $ns at 190 "$n1 setdest 70 70 15"
 proc finish { } {
 	global ns nf tf 
 	$ns flush-trace 
-	exec nam lab5.nam &
+	exec nam Prog4.nam &
 	close $tf 
 	exit 0
 }
