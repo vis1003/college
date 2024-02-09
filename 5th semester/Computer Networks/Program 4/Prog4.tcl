@@ -57,16 +57,15 @@ $ftp0 attach-agent $tcp0
 
 set sink1 [new Agent/TCPSink]
 $ns attach-agent $n1 $sink1
-
 $ns connect $tcp0 $sink1 
+
 set tcp1 [new Agent/TCP]
-
 $ns attach-agent $n1 $tcp1
+
 set ftp1 [new Application/FTP]
-
 $ftp1 attach-agent $tcp1
-set sink2 [new Agent/TCPSink]
 
+set sink2 [new Agent/TCPSink]
 $ns attach-agent $n2 $sink2
 $ns connect $tcp1 $sink2
 
