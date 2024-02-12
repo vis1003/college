@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <script src="angular.min.js"></script>
+    </head>
+    <body ng-app="myapp">
+        <h2>Search for employee and salary</h2>
+        <div ng-controller="s">
+            Enter name : <input ng-model="search_name" /> 
+            Enter salary : <input ng-model="search_salary"/>
+            <input type="button" value="clear filters " ng-click="clear_filters()"/>
+            <br>
+
+            <h3>List of employee</h3>
+            <table border="1">
+                <tr>
+                    <th>Slno</th>
+                    <th>Name</th>
+                    <th>Salary</th>
+                </tr>
+                <tr ng-repeat="empl in employees | filter:{name:search_name, salary:search_salary}">
+                <td>{{$index+1}}</td>
+                <td>{{empl.name}}</td>
+                <td>{{empl.salary}}</td>
+            </tr>
+            </table>
+        </div>
+    </body>
+</html>
+
+<script>
+    var sed=angular.module("myapp",[])
+    sed.controller("s",function($scope){
+        $scope.employees =[
+            {"name":"Akash","salary":18000},
+            {"name":"Amar","salary":18000},
+            {"name":"Bhaskar","salary":12000},
+            {"name":"Pushpa","salary":27000},
+            {"name":"Latha","salary":27000},
+            {"name":"Mohan","salary":18000},
+            {"name":"Akshay","salary":27000},
+        ];
+        $scope.clear_filters=function(){
+            $scope.search_name = ""
+            $scope.search_salary = ""
+        }
+    });
+</script>
