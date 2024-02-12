@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>Collection of Items</title>
+        <script src="angular.min.js"></script>
+    </head>
+    <body ng-app="myapp">
+        <div ng-controller="s">
+            <h2>Add a items to List </h2>
+            <input placeholder="Enter an iten to add" id="itm" ng-model="item_name"/>
+            <input type="button" style="font-family: Verdana; font-size:18px" value="Add" ng-click="additem()"/><br><br>
+            <h3>List of items </h3>
+            <table border="1">
+                <tr>
+                    <th>SlNo</th>
+                    <th>Item</th>
+                    <th>Action</th>
+                </tr>
+                <tr ng-repeat="myitem in itemList">
+                    <td>{{$index+1}}</td>
+                    <td>{{myitem}}</td>
+                    <td><input type="button" value="Remove" ng-click='remove_item(myitem)'></td>
+                </tr>
+            </table>
+            <br>
+            Total number of items:<b>{{itemList.length}}</b>
+        </div>
+    </body>
+</html>
+<script>
+    var h=angular.module("myapp",[]);
+    h.controller("s",function($scope){
+        $scope.itemList=["Pen","Pencil","Bag"];
+
+        $scope.additem=function()
+        {
+            if($scope.item_name && $scope.itemList.indexOf($scope.item_name)==-1)
+            {
+                $scope.itemList.push($scope.item_name);
+                $scope.item_name=""
+            }
+
+            else
+            {
+                if($scope.item_name)
+                {
+                    alert("Item "+$scope.item_name+" already exists in your collection");
+                    document.getElementById('itm').focus();
+                    return false;
+                }
+
+                else
+                {
+                    alert("Please enter an item to add");
+                    document.getElementById('itm').focus();
+                    return false;
+                }
+
+            }
+            
+        }
+        $scope.remove_item=function(item){
+            var c=confirm("Are you sure you want to remove this item "+item+" ?");
+            if(c==true){
+                var index=$scope.itemList.indexOf(item);
+                $scope.itemList.splice(index,1);
+            }
+        }
+
+
+    })
+</script>
