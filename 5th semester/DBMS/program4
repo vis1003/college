@@ -1,0 +1,157 @@
+MariaDB [(none)]> use college_214
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [college_214]> show tables;
++-----------------------+
+| Tables_in_college_214 |
++-----------------------+
+| CLASS                 |
+| COURSE                |
+| IAMarks               |
+| SEMSEC                |
+| STUDENT               |
++-----------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [college_214]> select * from CLASS;
++------------+------+
+| USN        | SSID |
++------------+------+
+| 1BI15CS102 |  101 |
+| 1BI15CS103 |  102 |
+| 1BI15CS101 |  103 |
+| 1BI16CS109 |  104 |
+| 1BI14CS101 |  106 |
+| 1BI14CS102 |  107 |
+| 1BI15CS104 |  108 |
+| 1BI15CS105 |  109 |
+| 1BI15CS106 |  110 |
++------------+------+
+9 rows in set (0.066 sec)
+
+MariaDB [college_214]> select * from COURSE;
++---------+-------+------+---------+
+| Subcode | Title | Sem  | Credits |
++---------+-------+------+---------+
+| 13CS81  | OAMD  |    8 |       6 |
+| 13CS82  | SA    |    8 |       2 |
+| 14CS62  | Ss    |    6 |       4 |
+| 15CS41  | ST    |    4 |       4 |
+| 15CS42  | SE    |    4 |       6 |
+| 16CS22  | OS    |    2 |       8 |
++---------+-------+------+---------+
+6 rows in set (0.000 sec)
+
+MariaDB [college_214]> select * from IAMarks;
++------------+---------+------+-------+-------+-------+---------+
+| USN        | Subcode | SSID | Test1 | Test2 | Test3 | FinalIA |
++------------+---------+------+-------+-------+-------+---------+
+| 1BI14CS101 | 16CS22  |  106 |     6 |     5 |    10 |    NULL |
+| 1BI14CS102 | 14CS62  |  107 |    14 |    16 |    16 |    NULL |
+| 1BI15CS101 | 15CS41  |  104 |    13 |    20 |    20 |    NULL |
+| 1BI15CS101 | 15CS42  |  103 |    18 |    20 |    20 |    NULL |
+| 1BI15CS102 | 15CS41  |  101 |    13 |    14 |    14 |    NULL |
+| 1BI16CS109 | 13CS82  |  102 |    20 |    20 |    20 |    NULL |
++------------+---------+------+-------+-------+-------+---------+
+6 rows in set (0.001 sec)
+
+MariaDB [college_214]> select * from SEMSEC;
++------+------+------+
+| SSID | Sem  | Sec  |
++------+------+------+
+|  101 |    2 | A    |
+|  102 |    4 | B    |
+|  103 |    6 | C    |
+|  104 |    8 | D    |
+|  105 |    2 | B    |
+|  106 |    8 | B    |
+|  107 |    8 | D    |
+|  108 |    4 | C    |
+|  109 |    4 | C    |
+|  110 |    4 | C    |
++------+------+------+
+10 rows in set (0.001 sec)
+
+MariaDB [college_214]> select * from STUDENT;
++------------+---------+------------------+----------+--------+
+| USN        | SName   | Address          | Phone    | Gender |
++------------+---------+------------------+----------+--------+
+| 1BI14CS101 | Danny   | 555 ITPL         | 98745632 | M      |
+| 1BI14CS102 | Stanley | 594 Marathahalli | 98745641 | M      |
+| 1BI15CS101 | John    | 44 Whitefield    | 98745651 | M      |
+| 1BI15CS102 | Grace   | 33 JP Nagar      | 98745663 | F      |
+| 1BI15CS103 | Claire  | 94 Jayanagar     | 98745676 | F      |
+| 1BI15CS104 | Miller  | 4 Whitefield     | 90045676 | M      |
+| 1BI15CS105 | Kate    | 3 JP Nagar       | 90045213 | F      |
+| 1BI15CS106 | Jade    | 9 Jayanagar      | 90087213 | F      |
+| 1BI16CS109 | Gloria  | 11 BEML Layout   | 90087313 | F      |
+| 1BI16CS110 | Jack    | 54 AECS Layout   | 95387313 | M      |
++------------+---------+------------------+----------+--------+
+10 rows in set (0.001 sec)
+
+MariaDB [college_214]> select S.* from STUDENT S, SEMSEC SS, CLASS C where S.USN=C.USN and SS.SSID=C.SSID and SS.Sem=4 and SS.Sec='C';
++------------+--------+--------------+----------+--------+
+| USN        | SName  | Address      | Phone    | Gender |
++------------+--------+--------------+----------+--------+
+| 1BI15CS104 | Miller | 4 Whitefield | 90045676 | M      |
+| 1BI15CS105 | Kate   | 3 JP Nagar   | 90045213 | F      |
+| 1BI15CS106 | Jade   | 9 Jayanagar  | 90087213 | F      |
++------------+--------+--------------+----------+--------+
+3 rows in set (0.034 sec)
+
+MariaDB [college_214]> select Sem, Sec, Gender, COUNT(Gender) from STUDENT NATURAL JOIN CLASS NATURAL JOIN SEMSEC group by Sem, Sec, Gender;
++------+------+--------+---------------+
+| Sem  | Sec  | Gender | COUNT(Gender) |
++------+------+--------+---------------+
+|    2 | A    | F      |             1 |
+|    4 | B    | F      |             1 |
+|    4 | C    | F      |             2 |
+|    4 | C    | M      |             1 |
+|    6 | C    | M      |             1 |
+|    8 | B    | M      |             1 |
+|    8 | D    | F      |             1 |
+|    8 | D    | M      |             1 |
++------+------+--------+---------------+
+8 rows in set (0.001 sec)
+
+MariaDB [college_214]> create view TEST1_1BI15CS101 as select USN, Subcode, Test1 from IAMarks where USN='1BI15CS101';
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [college_214]> select * from TEST1_1BI15CS101;
++------------+---------+-------+
+| USN        | Subcode | Test1 |
++------------+---------+-------+
+| 1BI15CS101 | 15CS41  |    13 |
+| 1BI15CS101 | 15CS42  |    18 |
++------------+---------+-------+
+2 rows in set (0.001 sec)
+
+MariaDB [college_214]> update IAMarks set FinalIA=(Test1+Test2+Test3-LEAST(Test1,Test2,Test3))/2;
+Query OK, 6 rows affected (0.006 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+MariaDB [college_214]> select * from IAMarks;
++------------+---------+------+-------+-------+-------+---------+
+| USN        | Subcode | SSID | Test1 | Test2 | Test3 | FinalIA |
++------------+---------+------+-------+-------+-------+---------+
+| 1BI14CS101 | 16CS22  |  106 |     6 |     5 |    10 |       8 |
+| 1BI14CS102 | 14CS62  |  107 |    14 |    16 |    16 |      16 |
+| 1BI15CS101 | 15CS41  |  104 |    13 |    20 |    20 |      20 |
+| 1BI15CS101 | 15CS42  |  103 |    18 |    20 |    20 |      20 |
+| 1BI15CS102 | 15CS41  |  101 |    13 |    14 |    14 |      14 |
+| 1BI16CS109 | 13CS82  |  102 |    20 |    20 |    20 |      20 |
++------------+---------+------+-------+-------+-------+---------+
+6 rows in set (0.001 sec)
+
+MariaDB [college_214]> (select I.USN,SUBCODE,"OUTSTANDING" as CATEGORY from IAMarks I, CLASS C, SEMSEC SS where I.USN=C.USN and C.SSID=SS.SSID and FinalIA between 17 and 20 and SEM=8 and SEC in('A','B','C','D')) UNION (select I.USN,SUBCODE,"AVERAGE" as CATEGORY from IAMarks I, CLASS C, SEMSEC SS where I.USN=C.USN and C.SSID=SS.SSID and FinalIA between 12 and 16 and SEM=8 and SEC in('A','B','C','D')) UNION (select I.USN,SUBCODE,"WEAK" as CATEGORY from IAMarks I, CLASS C, SEMSEC SS where I.USN=C.USN and C.SSID=SS.SSID and FinalIA < 12 and SEM=8 and SEC in('A','B','C','D'));
++------------+---------+-------------+
+| USN        | SUBCODE | CATEGORY    |
++------------+---------+-------------+
+| 1BI16CS109 | 13CS82  | OUTSTANDING |
+| 1BI14CS102 | 14CS62  | AVERAGE     |
+| 1BI14CS101 | 16CS22  | WEAK        |
++------------+---------+-------------+
+3 rows in set (0.002 sec)
+
