@@ -1,0 +1,37 @@
+MariaDB [(none)]> create database library_214;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> use library_214;
+Database changed
+MariaDB [library_214]> create table PUBLISHER(Name varchar(255) primary key, Address varchar(255), Phone int);
+Query OK, 0 rows affected (0.099 sec)
+
+MariaDB [library_214]> create table BOOK(Book_id int primary key, Title varchar(255), Publisher_Name varchar(255), Pub_Year int(4), foreign key(Publisher_Name) references PUBLISHER(Name));
+Query OK, 0 rows affected (0.087 sec)
+
+MariaDB [library_214]> create table BOOK_AUTHORS(Book_id int, Author_name varchar(255), foreign key(Book_id) references BOOK(Book_id) on delete cascade);
+Query OK, 0 rows affected (0.087 sec)
+
+MariaDB [library_214]> create table LIBRARY_PROGRAMME(Programme_id int primary key, Programme_Name varchar(255), Address varchar(255));
+Query OK, 0 rows affected (0.085 sec)
+
+MariaDB [library_214]> create table BOOK_COPIES(Book_id int, Programme_id int, No_of_Copies int, primary key(Book_id,Programme_id), foreign key(Book_id) references BOOK(Book_id) on delete cascade, foreign key(Programme_id) references LIBRARY_PROGRAMME(Programme_id) on delete cascade);
+Query OK, 0 rows affected (0.087 sec)
+
+MariaDB [library_214]> create table BOOK_LENDING(Book_id int, Programme_id int, Card_No int, Date_Out date, Due_Date date, primary key(Book_id,Programme_id,Card_No), foreign key(Book_id) references BOOK(Book_id) on delete cascade, foreign key(Programme_id) references LIBRARY_PROGRAMME(Programme_id) on delete cascade);
+Query OK, 0 rows affected (0.086 sec)
+
+MariaDB [library_214]> show tables;
++-----------------------+
+| Tables_in_library_214 |
++-----------------------+
+| BOOK                  |
+| BOOK_AUTHORS          |
+| BOOK_COPIES           |
+| BOOK_LENDING          |
+| LIBRARY_PROGRAMME     |
+| PUBLISHER             |
++-----------------------+
+6 rows in set (0.001 sec)
+
+
