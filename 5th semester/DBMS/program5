@@ -219,3 +219,93 @@ MariaDB [library_214]> select * from BOOK_LENDING;
 |    1005 |            5 |     701 | 2017-02-05 | 2017-03-21 |
 +---------+--------------+---------+------------+------------+
 11 rows in set (0.001 sec)
+
+MariaDB [library_214]> select C.Programme_id, B.Book_id, B.Title, B.Publisher_Name, A.Author_Name, C.No_of_Copies from BOOK B, BOOK_AUTHORS A, BOOK_COPIES C where B.Book_id=A.Book_id and B.Book_id=C.Book_id order by C.Programme_id;
++--------------+---------+--------------------------+----------------+-----------------+--------------+
+| Programme_id | Book_id | Title                    | Publisher_Name | Author_Name     | No_of_Copies |
++--------------+---------+--------------------------+----------------+-----------------+--------------+
+|            1 |    1001 | software engineering     | pearson        | Samuel Simons   |           50 |
+|            2 |    1001 | software engineering     | pearson        | Samuel Simons   |           10 |
+|            3 |    1002 | digital image processing | tata           | Morris Mano     |           80 |
+|            3 |    1005 | dbms                     | cambridge      | Chris Hemsworth |           60 |
+|            5 |    1003 | computer architecture    | dreamworks     | G Navathe       |           90 |
++--------------+---------+--------------------------+----------------+-----------------+--------------+
+5 rows in set (0.004 sec)
+
+MariaDB [library_214]> select Card_No from BOOK_LENDING where Date_Out>='2017-01-01' and Date_Out<='2017-06-30' group by Card_No having count(*)>3;
++---------+
+| Card_No |
++---------+
+|     501 |
+|     701 |
++---------+
+2 rows in set (0.001 sec)
+
+MariaDB [library_214]> delete from BOOK where Book_id=1005;
+Query OK, 1 row affected (0.071 sec)
+
+MariaDB [library_214]> select * from BOOK;
++---------+--------------------------+----------------+----------+
+| Book_id | Title                    | Publisher_Name | Pub_Year |
++---------+--------------------------+----------------+----------+
+|    1001 | software engineering     | pearson        |     1998 |
+|    1002 | digital image processing | tata           |     1998 |
+|    1003 | computer architecture    | dreamworks     |     1998 |
+|    1004 | data structures          | fox            |     1998 |
++---------+--------------------------+----------------+----------+
+4 rows in set (0.001 sec)
+
+MariaDB [library_214]> select * from BOOK_LENDING;
++---------+--------------+---------+------------+------------+
+| Book_id | Programme_id | Card_No | Date_Out   | Due_Date   |
++---------+--------------+---------+------------+------------+
+|    1001 |            1 |     501 | 2017-01-01 | 2017-06-30 |
+|    1002 |            1 |     501 | 2017-04-15 | 2017-05-26 |
+|    1002 |            2 |     544 | 2017-01-15 | 2017-06-25 |
+|    1002 |            5 |     701 | 2017-01-02 | 2017-01-26 |
+|    1003 |            1 |     501 | 2017-03-15 | 2017-06-26 |
+|    1003 |            1 |     599 | 2017-04-01 | 2017-05-16 |
+|    1003 |            5 |     701 | 2017-01-25 | 2017-02-26 |
+|    1004 |            5 |     701 | 2017-01-25 | 2017-06-26 |
++---------+--------------+---------+------------+------------+
+8 rows in set (0.001 sec)
+
+MariaDB [library_214]> select * from BOOK_COPIES;
++---------+--------------+--------------+
+| Book_id | Programme_id | No_of_Copies |
++---------+--------------+--------------+
+|    1001 |            1 |           50 |
+|    1001 |            2 |           10 |
+|    1002 |            3 |           80 |
+|    1003 |            5 |           90 |
++---------+--------------+--------------+
+4 rows in set (0.001 sec)
+
+MariaDB [library_214]> create view as V_PUB as select Pub_Year from BOOK;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'as V_PUB as select Pub_Year from BOOK' at line 1
+MariaDB [library_214]> create view V_PUB as select Pub_Year from BOOK;
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [library_214]> select * from V_PUB;
++----------+
+| Pub_Year |
++----------+
+|     1998 |
+|     1998 |
+|     1998 |
+|     1998 |
++----------+
+4 rows in set (0.001 sec)
+
+MariaDB [library_214]> create view V_BOOKS as select B.Book_id, B.Title, C.No_of_Copies from BOOK B, BOOK_COPIES C, LIBRARY_PROGRAMME L where B.Book_id=C.Book_id and L.Programme_id=C.Programme_id;
+Query OK, 0 rows affected (0.071 sec)
+
+MariaDB [library_214]> select * from V_BOOKS;
++---------+--------------------------+--------------+
+| Book_id | Title                    | No_of_Copies |
++---------+--------------------------+--------------+
+|    1001 | software engineering     |           50 |
+|    1001 | software engineering     |           10 |
+|    1002 | digital image processing |           80 |
+|    1003 | computer architecture    |           90 |
++---------+--------------------------+--------------+
