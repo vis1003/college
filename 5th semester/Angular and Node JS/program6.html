@@ -6,14 +6,14 @@
     <body ng-app="myApp6">
         <h2>To-Do list</h2>
         <div ng-controller="Taskcontroller">
-        Enter a task:<input type="text" style="font-family: Verdana, Geneva, Tahoma, sans-serif"  id="tsk" ng-model="newTask" />
+        Enter a task:<input type="text"  id="tsk" ng-model="newTask" />
         <input type="button" value="Add Task" ng-click="addTask()" /><br><br>
         <ul>
             <li ng-repeat="task in tasks">
                 <span ng-show="!task.EDITING">{{task.TITLE}}</span>
                 <input ng-show="task.EDITING" ng-model="task.TITLE" ng-blur="turnoffEditing(task)" />
-                <input type="button"   value="Edit" ng-click="editTask(task)" />&emsp;
-                <input type="button"   value="Delete" ng-click="deleteTask(task)" />  
+                <input type="button" value="Edit" ng-click="editTask(task)" />&emsp;
+                <input type="button" value="Delete" ng-click="deleteTask(task)" />  
             </li>
         </ul>
         </div>
@@ -28,7 +28,6 @@
             {"TITLE": "Brush my teeth", "COMPLETED" : true,"EDITING" : false},
             {"TITLE": "Have coffee", "COMPLETED" : false,"EDITING" : false}
         ];
-
 
         $scope.addTask = function()
         {
@@ -61,7 +60,6 @@
             task.EDITING = false;
 
         }
-
 
         $scope.deleteTask = function(task)
         {
