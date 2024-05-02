@@ -1,1 +1,24 @@
 Steps to create initial project
+1. Create a directory and create virtual environment
+python -m venv djenv
+
+2. Activate virtual environment
+source djenv/bin/activate
+
+3. Install Django
+pip install django
+
+4. Check if it is installed
+django-admin --version
+
+5. Create a project
+django-admin startproject sample
+
+6. Go into project directory
+cd sample
+
+7. Create django app
+python manage.py startapp appname
+
+8. To start server
+python manage.py runserver
