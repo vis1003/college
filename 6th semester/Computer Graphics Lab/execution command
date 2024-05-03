@@ -1,0 +1,2 @@
+gcc <prog_name>.c -lGL -lGLU -lglut
+./a.out
