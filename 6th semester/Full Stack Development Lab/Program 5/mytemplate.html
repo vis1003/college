@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>5th Lab Program</title>
+    </head>
+    <body>
+        <h2>Unordered list of fruits</h2>
+        <ul>
+            {% for fr in fruits%}
+            <li>{{fr}}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Ordered list of students</h2>
+        <ol>
+            {% for stud in students %}
+            <li>{{stud}}</li>
+            {% endfor %}
+        </ol>
+    </body>
+</html>
