@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse">
+            <a href="/home">Home</a> &emsp; &emsp;
+            <a href="/about">About Us</a> &emsp; &emsp;
+            <a href="/contact">Contact Us</a> &emsp; &emsp;
+        </nav>
+
+        <section> 
+            {% block content %}{% endblock %}
+        </section>
+           
+        <div style="margin-top:470px">
+            <footer style="margin-left:10px">
+                <hr>
+                &copy;2024 6th Sem CMRIT Vismitha Django developer
+            </footer>
+        </div>
+    </body>
+</html>
