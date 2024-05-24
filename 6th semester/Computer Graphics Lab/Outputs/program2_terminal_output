@@ -1,0 +1,40 @@
+studentc@cmritcsel503sys19-Lenovo-H50-50:~/1CR21CS214$ gcc program2.c -lGL -lglut -lGLU -lm
+studentc@cmritcsel503sys19-Lenovo-H50-50:~/1CR21CS214$ ./a.out
+Enter the choice
+0. Normal triangle
+1. Translation
+2. Scaling
+3. Rotation
+4. Exit
+0
+Enter the choice
+0. Normal triangle
+1. Translation
+2. Scaling
+3. Rotation
+4. Exit
+1
+Enter the values of tx and ty:50 80
+Enter the choice
+0. Normal triangle
+1. Translation
+2. Scaling
+3. Rotation
+4. Exit
+2
+Enter the values of sx and sy:2 2
+Enter the choice
+0. Normal triangle
+1. Translation
+2. Scaling
+3. Rotation
+4. Exit
+3
+Enter the angle:60
+Enter the choice
+0. Normal triangle
+1. Translation
+2. Scaling
+3. Rotation
+4. Exit
+
