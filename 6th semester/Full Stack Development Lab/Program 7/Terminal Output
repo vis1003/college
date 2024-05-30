@@ -39,3 +39,12 @@ In [12]: courseList = [course1,course2,course3]
 In [13]: for c in courseList:
     ...:     c.save()
     ...: 
+
+In [14]: course4 = Course(course_code='21CS64', course_name='Advanced Java', course_credits=3)
+
+In [15]: course5 = Course(course_code='21CS65', course_name='Data Visualization', course_credits=3)
+
+In [16]: course4.save()
+
+In [17]: course5.save()
+
