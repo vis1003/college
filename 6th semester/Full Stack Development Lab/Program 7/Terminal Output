@@ -1,0 +1,41 @@
+(base) student@csel506sys19-OptiPlex-3090:~/1CR21CS214/Lab1/sample$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, prog7, sessions
+Running migrations:
+  Applying prog7.0001_initial... OK
+(base) student@csel506sys19-OptiPlex-3090:~/1CR21CS214/Lab1/sample$ python manage.py makemigrations
+No changes detected
+(base) student@csel506sys19-OptiPlex-3090:~/1CR21CS214/Lab1/sample$ python manage.py shell
+Python 3.9.13 (main, Aug 25 2022, 23:26:10) 
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.31.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from prog7.models import Student
+
+In [2]: stud1 = Student(student_usn='1CR21CS001', student_name='Ann', student_sem=6)
+
+In [3]: stud2 = Student(student_usn='1CR21CS002', student_name='Ben', student_sem=6)
+
+In [4]: stud3 = Student(student_usn='1CR21CS003', student_name='Harry', student_sem=6)
+
+In [5]: stud4 = Student(student_usn='1CR21CS004', student_name='Jack', student_sem=6)
+
+In [6]: studList = [stud1,stud2,stud3,stud4]
+
+In [7]: for d in studList:
+   ...:     d.save()
+   ...: 
+
+In [8]: from prog7.models import Course
+
+In [9]: course1 = Course(course_code='21CS61', course_name='Software Engg', course_credits=3)
+
+In [10]: course2 = Course(course_code='21CS62', course_name='Full Stack Dev', course_credits=4)
+
+In [11]: course3 = Course(course_code='21CS63', course_name='Computer Graphics', course_credits=4)
+
+In [12]: courseList = [course1,course2,course3]
+
+In [13]: for c in courseList:
+    ...:     c.save()
+    ...: 
