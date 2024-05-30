@@ -1,0 +1,15 @@
+1. Create app
+2. Open models.py of that app and create the classes
+3. Run in terminal:
+  python manage.py migrate
+  python manage.py makemigrations
+4. Open shell:
+  python manage.py shell
+5. import model classes:
+  from app_name.models import *
+6. Create new entry:
+  s1=Student(usn='',.......)
+7. Save the entry:
+  s1.save()
+  (or)
+  Put all entries into a list and use for loop to save all at once
