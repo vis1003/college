@@ -1,8 +1,8 @@
 1. Create app
 2. Open models.py of that app and create the classes
 3. Run in terminal:
-  python manage.py migrate
   python manage.py makemigrations
+  python manage.py migrate
 4. Open shell:
   python manage.py shell
 5. import model classes:
