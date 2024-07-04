@@ -1,0 +1,26 @@
+(base) student@csel506sys19-OptiPlex-3090:~/1CR21CS214/project$ python manage.py shell
+Python 3.9.13 (main, Aug 25 2022, 23:26:10) 
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.31.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from prog9.models import *
+
+In [2]: s1=Student(student_usn="1CR21CS001",student_name="Ann",student_sem=6)
+
+In [3]: s1=Student(student_usn="1CR21CS002",student_name="Ben",student_sem=6)
+
+In [4]: s1=Student(student_usn="1CR21CS001",student_name="Ann",student_sem=6)
+
+In [5]: s2=Student(student_usn="1CR21CS002",student_name="Ben",student_sem=6)
+
+In [6]: s3=Student(student_usn="1CR21CS003",student_name="Dan",student_sem=5)
+
+In [7]: s4=Student(student_usn="1CR21CS004",student_name="Clara",student_sem=5)
+
+In [8]: students=[s1,s2,s3,s4]
+
+In [9]: for s in students:
+   ...:     s.save()
+   ...: 
+
+In [10]: exit()
