@@ -1,0 +1,25 @@
+<html>
+    <body>
+        <h2>List of Students with enrolled courses</h2>
+        {% if student_list %}
+        <table border>
+            <tr>
+                <th>USN</th>
+                <th>Courses Enrolled</th>
+            </tr>
+            {% for student in student_list %}
+            <tr>
+                <td><a href="/student_gen_detail/{{student.pk}}">{{student.student_usn}}</a></td>
+
+                <td>{% for course in student.enrolment.all %}
+                    <span>{{course.course_name}}</span>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h1>No student enrolled</h1>
+        {% endif %}
+    </body>
+</html>
