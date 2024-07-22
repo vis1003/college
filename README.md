@@ -1,3 +1,2 @@
 # college
-lab program codes
-4th semester
+Lab Program codes of 4th, 5th and 6th semester
